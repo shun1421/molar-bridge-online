@@ -3,48 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>モル・ブリッジ オンライン</title>
+    <title>ケミカル・リレー・ダッシュ</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
     <div class="game-container">
-        <header>
-            <div class="header-content">
-                <h1>🧪 モル・ブリッジ</h1>
-                <div class="status-bar">
-                    <span id="score-display">スコア: 0</span>
-                    <span id="life-display">
-                        <i class="fas fa-heart"></i>
-                        <i class="fas fa-heart"></i>
-                        <i class="fas fa-heart"></i>
-                    </span>
-                </div>
-            </div>
+        <header class="problem-header">
+            <div id="problem-text">問題：10g の H₂ から何 g の H₂O が生成するか？</div>
         </header>
 
         <main>
-            <section class="game-world">
-                <div class="sky"></div>
-                <div class="valley">
-                    <div class="far-side"></div>
-                    <div id="bridge" class="bridge"></div>
-                    <div id="character" class="character beaker">
-                        <i class="fas fa-beaker"></i>
-                    </div>
-                </div>
+            <section class="shared-slots">
+                <div class="slot" id="slot-1" data-placeholder="物質A 単位変換"></div>
+                <div class="gate" id="slot-2" data-placeholder="係数比ゲート"></div>
+                <div class="slot" id="slot-3" data-placeholder="物質B 単位変換"></div>
             </section>
 
-            <section class="quiz-area">
-                <div class="question-card">
-                    <h2>問題 <span id="question-number">1</span></h2>
-                    <p id="question-text" class="question-text">読み込み中...</p>
+            <section id="final-zone" class="final-zone locked">
+                <div class="final-input-wrap">
+                    <input type="number" id="final-answer" placeholder="最終数値を入力！" disabled>
+                    <button id="final-submit" disabled>回答</button>
                 </div>
-                <div id="answer-options" class="answer-options">
-                    </div>
-                <button id="next-btn" class="next-btn hidden">次の問題へ <i class="fas fa-arrow-right"></i></button>
             </section>
         </main>
+
+        <footer>
+            <div class="hand-label">あなたの手札（どれか1枚を選択）</div>
+            <div id="player-hand" class="player-hand">
+                </div>
+            <div class="action-footer">
+                <button id="pass-btn" class="secondary-btn">パス（1枚引く）</button>
+                <div id="player-score">Score: 0</div>
+            </div>
+        </footer>
     </div>
     <script src="app.js"></script>
 </body>

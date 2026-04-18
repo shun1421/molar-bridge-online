@@ -1,185 +1,75 @@
 :root {
-    --primary-color: #58cc02; /* Duolingoグリーン */
-    --primary-active: #46a302;
-    --error-color: #ea2b2b;
-    --sky-color: #84d8ff;
-    --valley-color: #a52a2a;
-    --bridge-color: #ffc800;
-    --text-color: #4b4b4b;
-    --card-bg: #ffffff;
+    --primary: #58cc02;
+    --slot-bg: #e5e5e5;
+    --card-color: #ffffff;
+    --final-color: #ffc800;
 }
 
 body {
-    font-family: "Helvetica Neue", Arial, sans-serif;
-    margin: 0;
-    background-color: #f7f7f7;
-    color: var(--text-color);
-    display: flex;
-    justify-content: center;
-    overflow-x: hidden;
+    margin: 0; font-family: sans-serif; background: #f0f0f0;
+    display: flex; justify-content: center; height: 100vh;
 }
 
 .game-container {
-    width: 100%;
-    max-width: 480px; /* スマホサイズ */
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
+    width: 100%; max-width: 500px; background: white;
+    display: flex; flex-direction: column; position: relative;
 }
 
-/* ヘッダー */
-header {
-    background: white;
-    padding: 10px 20px;
-    border-bottom: 2px solid #e5e5e5;
-    z-index: 10;
+.problem-header {
+    background: #1899d6; color: white; padding: 15px;
+    font-weight: bold; text-align: center; font-size: 1.1rem;
 }
 
-.header-content {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+/* スロットエリア */
+.shared-slots {
+    display: flex; justify-content: space-around; padding: 40px 10px;
+    background: #f7f7f7; gap: 10px;
 }
 
-h1 { font-size: 1.2rem; margin: 0; }
-
-.status-bar {
-    display: flex;
-    gap: 15px;
-    font-weight: bold;
+.slot, .gate {
+    flex: 1; height: 100px; border: 3px dashed #ccc;
+    border-radius: 15px; display: flex; align-items: center;
+    justify-content: center; position: relative; background: white;
 }
 
-#life-display { color: var(--error-color); }
-
-/* ゲーム世界（ビジュアル） */
-.game-world {
-    height: 30vh;
-    position: relative;
-    overflow: hidden;
+.slot::before, .gate::before {
+    content: attr(data-placeholder); position: absolute; top: -25px;
+    font-size: 0.7rem; color: #888; width: 100%; text-align: center;
 }
 
-.sky {
-    position: absolute;
-    top: 0; width: 100%; height: 80%;
-    background-color: var(--sky-color);
+/* カードのデザイン */
+.card {
+    background: white; border: 2px solid #ddd; border-bottom: 4px solid #ddd;
+    border-radius: 10px; padding: 10px; min-width: 60px;
+    text-align: center; font-weight: bold; cursor: pointer; transition: 0.1s;
 }
 
-.valley {
-    position: absolute;
-    bottom: 0; width: 100%; height: 20%;
-    background-color: var(--valley-color);
+.card:active { transform: translateY(2px); border-bottom-width: 2px; }
+
+/* ファイナルゾーン */
+.final-zone {
+    padding: 20px; transition: 0.3s; background: #eee;
 }
 
-.far-side {
-    position: absolute;
-    right: 0; bottom: 0;
-    width: 30%; height: 100%;
-    background-color: #8bc34a; /* 向こう岸（緑） */
-    border-radius: 20px 0 0 0;
+.final-zone.active { background: var(--final-color); }
+
+.final-input-wrap { display: flex; gap: 10px; }
+
+input { flex: 1; padding: 12px; border-radius: 10px; border: none; font-size: 1rem; }
+
+/* 手札エリア */
+footer {
+    margin-top: auto; background: white; border-top: 2px solid #eee; padding: 15px;
 }
 
-.bridge {
-    position: absolute;
-    left: 10%; bottom: 80%; /* 谷の上 */
-    height: 10px;
-    background-color: var(--bridge-color);
-    width: 0%; /* 初期は0 */
-    border-radius: 5px;
-    transition: width 0.5s ease-out; /* 橋が伸びるアニメーション */
+.player-hand {
+    display: flex; gap: 10px; overflow-x: auto; padding-bottom: 10px;
 }
 
-.character {
-    position: absolute;
-    left: 10%; bottom: 100%; /* 橋の上 */
-    font-size: 2rem;
-    color: #1899d6;
-    transition: left 0.5s ease-out; /* キャラが動くアニメーション */
-    transform: translateX(-50%); /* 中央合わせ */
+.action-footer {
+    display: flex; justify-content: space-between; align-items: center; margin-top: 10px;
 }
 
-/* クイズエリア */
-.quiz-area {
-    flex: 1;
-    background: white;
-    padding: 20px;
-    border-radius: 30px 30px 0 0;
-    box-shadow: 0 -5px 15px rgba(0,0,0,0.05);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    z-index: 5;
+.secondary-btn {
+    padding: 10px 20px; border-radius: 10px; border: 1px solid #ccc; background: white;
 }
-
-.question-card {
-    text-align: center;
-    margin-bottom: 20px;
-    width: 100%;
-}
-
-.question-text {
-    font-size: 1.3rem;
-    font-weight: bold;
-    margin: 10px 0;
-}
-
-/* 解答選択肢 */
-.answer-options {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 15px;
-    width: 100%;
-    margin-bottom: 20px;
-}
-
-.answer-btn {
-    background: white;
-    border: 2px solid #e5e5e5;
-    border-bottom: 4px solid #e5e5e5;
-    border-radius: 15px;
-    padding: 15px;
-    font-size: 1.1rem;
-    font-weight: bold;
-    color: var(--text-color);
-    cursor: pointer;
-    transition: all 0.1s;
-}
-
-.answer-btn:hover { background-color: #f7f7f7; }
-
-.answer-btn:active {
-    border-bottom-width: 2px;
-    transform: translateY(2px);
-}
-
-/* 正解・不正解のスタイル */
-.answer-btn.correct {
-    background-color: #d7ffb8;
-    border-color: #58cc02;
-    color: #58cc02;
-}
-
-.answer-btn.incorrect {
-    background-color: #ffdfe0;
-    border-color: #ea2b2b;
-    color: #ea2b2b;
-}
-
-/* 次へボタン */
-.next-btn {
-    background-color: var(--primary-color);
-    color: white;
-    border: none;
-    border-bottom: 4px solid var(--primary-active);
-    border-radius: 15px;
-    padding: 15px 30px;
-    font-size: 1.1rem;
-    font-weight: bold;
-    cursor: pointer;
-}
-
-.next-btn:active {
-    border-bottom-width: 2px;
-    transform: translateY(2px);
-}
-
-.hidden { display: none !important; }
