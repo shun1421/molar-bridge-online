@@ -5,36 +5,44 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>モル・ブリッジ オンライン</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
-    <div class="container">
+    <div class="game-container">
         <header>
-            <h1>🧪 モル・ブリッジ</h1>
-            <p>物質量（mol）の架け橋を渡ろう</p>
+            <div class="header-content">
+                <h1>🧪 モル・ブリッジ</h1>
+                <div class="status-bar">
+                    <span id="score-display">スコア: 0</span>
+                    <span id="life-display">
+                        <i class="fas fa-heart"></i>
+                        <i class="fas fa-heart"></i>
+                        <i class="fas fa-heart"></i>
+                    </span>
+                </div>
+            </div>
         </header>
 
         <main>
-            <section class="calc-card">
-                <div class="input-group">
-                    <label>物質を選択</label>
-                    <select id="substance">
-                        <option value="18.02">水 (H₂O)</option>
-                        <option value="44.01">二酸化炭素 (CO₂)</option>
-                        <option value="58.44">塩化ナトリウム (NaCl)</option>
-                        <option value="180.16">グルコース (C₆H₁₂O₆)</option>
-                    </select>
+            <section class="game-world">
+                <div class="sky"></div>
+                <div class="valley">
+                    <div class="far-side"></div>
+                    <div id="bridge" class="bridge"></div>
+                    <div id="character" class="character beaker">
+                        <i class="fas fa-beaker"></i>
+                    </div>
                 </div>
+            </section>
 
-                <div class="input-group">
-                    <label>質量 (g) を入力</label>
-                    <input type="number" id="mass" placeholder="例: 36" step="0.1">
+            <section class="quiz-area">
+                <div class="question-card">
+                    <h2>問題 <span id="question-number">1</span></h2>
+                    <p id="question-text" class="question-text">読み込み中...</p>
                 </div>
-
-                <div class="arrow">↓</div>
-
-                <div class="result-display">
-                    <span id="result-value">0.00</span> <span class="unit">mol</span>
-                </div>
+                <div id="answer-options" class="answer-options">
+                    </div>
+                <button id="next-btn" class="next-btn hidden">次の問題へ <i class="fas fa-arrow-right"></i></button>
             </section>
         </main>
     </div>
