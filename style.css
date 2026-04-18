@@ -1,0 +1,71 @@
+:root {
+    --primary-color: #58cc02; /* Duolingoグリーン */
+    --text-color: #4b4b4b;
+    --bg-color: #f7f7f7;
+}
+
+body {
+    font-family: "Helvetica Neue", Arial, sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    display: flex;
+    justify-content: center;
+    padding-top: 50px;
+}
+
+.container {
+    width: 90%;
+    max-width: 400px;
+    text-align: center;
+}
+
+.calc-card {
+    background: white;
+    border: 2px solid #e5e5e5;
+    border-bottom: 6px solid #e5e5e5;
+    border-radius: 20px;
+    padding: 30px;
+    margin-top: 20px;
+}
+
+.input-group {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 8px;
+    font-size: 0.9rem;
+}
+
+select, input {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #e5e5e5;
+    border-radius: 12px;
+    font-size: 1rem;
+    box-sizing: border-box;
+}
+
+.arrow {
+    font-size: 2rem;
+    color: var(--primary-color);
+    margin: 10px 0;
+}
+
+.result-display {
+    background: #ddf4ff;
+    border: 2px solid #84d8ff;
+    border-bottom: 5px solid #84d8ff;
+    border-radius: 15px;
+    padding: 20px;
+    font-size: 2rem;
+    font-weight: bold;
+    color: #1899d6;
+}
+
+.unit {
+    font-size: 1.2rem;
+}

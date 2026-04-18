@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>モル・ブリッジ オンライン</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🧪 モル・ブリッジ</h1>
+            <p>物質量（mol）の架け橋を渡ろう</p>
+        </header>
+
+        <main>
+            <section class="calc-card">
+                <div class="input-group">
+                    <label>物質を選択</label>
+                    <select id="substance">
+                        <option value="18.02">水 (H₂O)</option>
+                        <option value="44.01">二酸化炭素 (CO₂)</option>
+                        <option value="58.44">塩化ナトリウム (NaCl)</option>
+                        <option value="180.16">グルコース (C₆H₁₂O₆)</option>
+                    </select>
+                </div>
+
+                <div class="input-group">
+                    <label>質量 (g) を入力</label>
+                    <input type="number" id="mass" placeholder="例: 36" step="0.1">
+                </div>
+
+                <div class="arrow">↓</div>
+
+                <div class="result-display">
+                    <span id="result-value">0.00</span> <span class="unit">mol</span>
+                </div>
+            </section>
+        </main>
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>
