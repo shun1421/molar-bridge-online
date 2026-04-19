@@ -1,75 +1,98 @@
 :root {
-    --primary: #58cc02;
-    --slot-bg: #e5e5e5;
-    --card-color: #ffffff;
-    --final-color: #ffc800;
+    --primary-color: #58cc02; /* Duolingo Green */
+    --secondary-color: #1cb0f6; /* Blue */
+    --accent-color: #ffc800; /* Yellow */
+    --text-color: #4b4b4b;
+    --border-color: #e5e5e5;
 }
 
 body {
-    margin: 0; font-family: sans-serif; background: #f0f0f0;
-    display: flex; justify-content: center; height: 100vh;
+    font-family: 'Varela Round', 'Hiragino Kaku Gothic ProN', sans-serif;
+    background-color: #ffffff;
+    color: var(--text-color);
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
 }
 
-.game-container {
-    width: 100%; max-width: 500px; background: white;
-    display: flex; flex-direction: column; position: relative;
+#app {
+    width: 100%;
+    max-width: 500px;
+    height: 90vh;
+    padding: 20px;
+    text-align: center;
 }
 
-.problem-header {
-    background: #1899d6; color: white; padding: 15px;
-    font-weight: bold; text-align: center; font-size: 1.1rem;
+.screen {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
 }
 
-/* スロットエリア */
-.shared-slots {
-    display: flex; justify-content: space-around; padding: 40px 10px;
-    background: #f7f7f7; gap: 10px;
+.hidden { display: none; }
+
+h1 { color: var(--primary-color); font-size: 3rem; margin-bottom: 2rem; }
+
+/* Buttons */
+button {
+    cursor: pointer;
+    border: none;
+    border-radius: 15px;
+    padding: 15px 25px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    transition: filter 0.2s, transform 0.1s;
+    box-shadow: 0 4px 0 rgba(0,0,0,0.1);
 }
 
-.slot, .gate {
-    flex: 1; height: 100px; border: 3px dashed #ccc;
-    border-radius: 15px; display: flex; align-items: center;
-    justify-content: center; position: relative; background: white;
+button:active { transform: translateY(4px); box-shadow: none; }
+
+.btn-primary { background-color: var(--primary-color); color: white; margin: 10px; }
+.btn-secondary { background-color: var(--secondary-color); color: white; margin: 10px; }
+
+/* Cards & Slots */
+.card-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    margin-top: 20px;
 }
 
-.slot::before, .gate::before {
-    content: attr(data-placeholder); position: absolute; top: -25px;
-    font-size: 0.7rem; color: #888; width: 100%; text-align: center;
-}
-
-/* カードのデザイン */
 .card {
-    background: white; border: 2px solid #ddd; border-bottom: 4px solid #ddd;
-    border-radius: 10px; padding: 10px; min-width: 60px;
-    text-align: center; font-weight: bold; cursor: pointer; transition: 0.1s;
+    background: white;
+    border: 2px solid var(--border-color);
+    border-radius: 15px;
+    padding: 15px;
+    font-size: 1rem;
+    cursor: pointer;
 }
 
-.card:active { transform: translateY(2px); border-bottom-width: 2px; }
+.card:hover { border-color: var(--secondary-color); background-color: #f0f8ff; }
 
-/* ファイナルゾーン */
-.final-zone {
-    padding: 20px; transition: 0.3s; background: #eee;
+.slots-container {
+    display: flex;
+    justify-content: space-around;
+    margin: 20px 0;
 }
 
-.final-zone.active { background: var(--final-color); }
-
-.final-input-wrap { display: flex; gap: 10px; }
-
-input { flex: 1; padding: 12px; border-radius: 10px; border: none; font-size: 1rem; }
-
-/* 手札エリア */
-footer {
-    margin-top: auto; background: white; border-top: 2px solid #eee; padding: 15px;
+.slot {
+    width: 100px;
+    height: 120px;
+    border: 3px dashed var(--border-color);
+    border-radius: 15px;
+    position: relative;
+    font-size: 0.8rem;
 }
+
+.slot span { position: absolute; top: -20px; width: 100%; left: 0; }
 
 .player-hand {
-    display: flex; gap: 10px; overflow-x: auto; padding-bottom: 10px;
-}
-
-.action-footer {
-    display: flex; justify-content: space-between; align-items: center; margin-top: 10px;
-}
-
-.secondary-btn {
-    padding: 10px 20px; border-radius: 10px; border: 1px solid #ccc; background: white;
+    display: flex;
+    overflow-x: auto;
+    gap: 10px;
+    padding: 10px;
+    background: #f7f7f7;
+    border-radius: 15px;
 }
